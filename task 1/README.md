@@ -10,13 +10,13 @@
 
 （1）学习使用github，将任务仓库克隆到本地，进行相应的作业更改之后，对源仓库pull request。
 
-（2）掌握opencv基础，编写main.cpp，实现打开摄像头并对采集图像进行颜色反转的功能。
+（2）掌握opencv基础，编写main.cpp，实现打开摄像头并对采集图像进行颜色反转(255-对应通道值)的功能。
 
 ## 3、提交要求
 
 提交两份文件：
 
-（1）CmakeList.txt
+（1）CMakeList.txt
 
 （2）main.cpp
 

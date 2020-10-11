@@ -28,7 +28,7 @@ int main()
    cvtColor(srcImage, HSVImage, COLOR_BGR2HSV);
 
     //将图像二值化
-   Scalar scalarL = Scalar(6,115,85);
+   Scalar scalarL = Scalar(6,110,85);
    Scalar scalarH = Scalar(10,255,255);
    inRange(HSVImage,scalarL,scalarH,mask);
    namedWindow("二值化",WINDOW_AUTOSIZE);

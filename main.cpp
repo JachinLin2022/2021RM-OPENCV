@@ -1,31 +1,35 @@
-#include<opencv2/opencv.hpp>
+#include <iostream>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 
+using namespace std;
 using namespace cv;
 
-int main(){
-        cv::namedWindow("OpenCVCamera",cv::WINDOW_AUTOSIZE);
-        cv::VideoCapture capture(0);
+int main()
+{
+   Mat srcImage = imread("test.jpg");
 
-        while(true){
-                cv::Mat frame,image;
-                capture>>frame;
+   //判断图像是否加载成功
+   if(!srcImage.data){
+       cout << "图像加载失败!" << endl;
+       return false;
+   } 
+   else
+       cout << "图像加载成功!" << endl << endl;
 
-                image.create(frame.size(),frame.type());
+   //将图像转换为HSV图,采用COLOR_前缀
+   Mat HSVImage,mask;
 
-                int height=frame.rows;
-                int width=frame.cols;
+   cvtColor(srcImage, HSVImage, COLOR_BGR2HSV);
 
-                for(int i=0;i<height;i++){
-                        for(int j=0;j<width;j++){
-                                image.at<cv::Vec3b>(i,j)[0]=255-frame.at<cv::Vec3b>(i,j)[0];
-                                image.at<cv::Vec3b>(i,j)[1]=255-frame.at<cv::Vec3b>(i,j)[1];
-                                image.at<cv::Vec3b>(i,j)[2]=255-frame.at<cv::Vec3b>(i,j)[2];
-                        }
-                }
+    //将图像二值化
+   inRange(HSVImage,Scalar(0,240,130),Scalar(10,255,255),mask);
+   namedWindow("gray",WINDOW_AUTOSIZE);
+   imshow("gray",mask);
+   imwrite("gray.jpg",mask);
 
-                cv::imshow("OpenCVCamera",image);
-                if(cv::waitKey(30)!=-1){break;}
-        }
+   waitKey(0);
 
-        return 0;
-}
+   return 0;
+} 

@@ -1,8 +1,13 @@
 #include <opencv2/opencv.hpp>
+/**@name invertColorIterator
+ * @brief Invert the colors with cv::Mat's iterator interface
+ */
+void invertColorIterator(cv::Mat&);
 
-void invert_color_iter(cv::Mat&);
-
-void invert_color_ptr(cv::Mat&);
+/**@name invert color_ptr
+ * @brief Invert the colors with pointers, the approach described in ppt
+ */
+void invertColorPointer(cv::Mat&);
 
 int main() {
   cv::namedWindow("OpenCVCamera", cv::WINDOW_AUTOSIZE);
@@ -15,14 +20,14 @@ int main() {
   while (true) {
     cv::Mat frame;
     capture >> frame;
-    invert_color_iter(frame);
+    invertColorIterator(frame);
     cv::imshow("OpenCVCamera", frame);
     if (cv::waitKey(30) != -1) break;
   }
 }
 
-void invert_color_iter(cv::Mat& mat) {
-  assert(mat.type() == CV_8UC3);
+void invertColorIterator(cv::Mat& mat) {
+  CV_Assert(mat.type() == CV_8UC3);
   
   auto i = mat.begin<cv::Vec3b>();
   auto end = mat.end<cv::Vec3b>();
@@ -34,9 +39,9 @@ void invert_color_iter(cv::Mat& mat) {
   }
 }
 
-void invert_color_ptr(cv::Mat& mat) {
-  assert(mat.depth() == CV_8U);
-  // Get # of rows and cols
+void invertColorPointer(cv::Mat& mat) {
+  CV_Assert(mat.depth() == CV_8U);
+  // # of rows and cols
   int row_count = mat.isContinuous() ? 1 : mat.rows;
   int col_count = mat.isContinuous() ? mat.rows * mat.cols * mat.channels()
                                      : mat.cols * mat.channels();

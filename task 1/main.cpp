@@ -15,13 +15,13 @@ int main() {
   while (true) {
     cv::Mat frame;
     capture >> frame;
-    invert_color_ptr(frame);
+    invert_color_iter(frame);
     cv::imshow("OpenCVCamera", frame);
     if (cv::waitKey(30) != -1) break;
   }
 }
 
-void invert_color_itr(cv::Mat& mat) {
+void invert_color_iter(cv::Mat& mat) {
   assert(mat.type() == CV_8UC3);
   
   auto i = mat.begin<cv::Vec3b>();

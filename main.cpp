@@ -60,9 +60,9 @@ int main()
             for (size_t k=0;k<4;k++)
             {
                 cv::line(rectImage, vertices[k], vertices[(k+1)%4], cv::Scalar(0,255,0), 4, 8, 0);    
-                angles[j] = fabs(rRect.angle);
+                angles[j] = (rRect.size.height > rRect.size.width) ? (90 + rRect.angle): (rRect.angle);
             }
-            centers[j] = (rRect.size.height > rRect.size.width) ? rRect.center : (90 + rRect.center);
+            centers[j] = rRect.center;
             j=j+1;         
         }   
     }
@@ -76,7 +76,7 @@ int main()
             distance = sqrt(pow((centers[m].x - centers[n].x),2) + pow((centers[m].y - centers[n].y),2));
             if (distance > sidelength - 50 && distance < sidelength + 50 && angles[m] <= angles[n]+2 && angles[m] >= angles[n]-2)
             {  
-                double angle = std::min(angles[n],angles[m]);
+                double angle = std::max(angles[n],angles[m]);
                 endpoints[0].x=centers[m].x + fabs(sidelength*sin(angle)/2);
                 endpoints[0].y=centers[m].y + fabs(sidelength*cos(angle)/2);
                 endpoints[1].x=centers[n].x + fabs(sidelength*sin(angle)/2);
@@ -85,8 +85,6 @@ int main()
                 endpoints[2].y=centers[n].y - fabs(sidelength*cos(angle)/2);
                 endpoints[3].x=centers[m].x - fabs(sidelength*sin(angle)/2);
                 endpoints[3].y=centers[m].y - fabs(sidelength*cos(angle)/2);
-                std::cout<<angles[m]<<angles[n]<<angle<<std::endl;
-                std::cout<<endpoints[0]<<endpoints[1]<<endpoints[2]<<endpoints[3]<<std::endl;
                 for (size_t k=0;k<4;k++)
                 {
                     cv::line(rectImage, endpoints[k], endpoints[(k+1)%4], cv::Scalar(255,0,0), 4, 8, 0);

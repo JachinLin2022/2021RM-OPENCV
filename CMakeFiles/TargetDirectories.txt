@@ -1,0 +1,3 @@
+/media/wasx/eaac263d-6532-4dcc-a600-7ad1d6724f6a/wasx/2021RM-OPENCV/CMakeFiles/rebuild_cache.dir
+/media/wasx/eaac263d-6532-4dcc-a600-7ad1d6724f6a/wasx/2021RM-OPENCV/CMakeFiles/edit_cache.dir
+/media/wasx/eaac263d-6532-4dcc-a600-7ad1d6724f6a/wasx/2021RM-OPENCV/CMakeFiles/main.dir
